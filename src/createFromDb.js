@@ -41,7 +41,7 @@ const createRoleQuestions = async () => {
 const createEmployeeQuestions = async () => {
   const roles = await getRoles();
   const employees = await getEmployeeNameRoleDepartment();
-  console.log(employees)
+
   const { firstName, lastName, roleId, managerId } = await inquirer.prompt([
     {
       name: "firstName",
