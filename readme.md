@@ -11,5 +11,5 @@ To get started:
 * Run `npm run start` to start the application!
 
 ## -- Links and demo -- 
-* A video demo for the application can be found [here]()
+* A video demo for the application can be found [here](https://drive.google.com/file/d/1Vf2ou054Zbtw0CAsxMfKzg-Fmy17ksaL/view)
 * A web application based on this application can be found [here](https://github.com/LordusWhale/employee-manager-t3)
