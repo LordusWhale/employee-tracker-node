@@ -70,7 +70,7 @@ const updateRoleDepartentQuestions = async () => {
       type: "list",
       message: "Which role do you want to update?",
       choices: roles.map((role) => ({
-        name: `${role.title} (${role.salary})`,
+        name: `${role.title} (${role.salary}) - ${role.department}`,
         value: role.id,
       })),
     },
