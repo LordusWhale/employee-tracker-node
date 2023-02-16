@@ -1,4 +1,5 @@
-const {connection} = require('./dbFuntions')
+const {connection} = require('./db/db.connect')
+const { setUpDb } = require('./db/setUpDb')
 
 const departments = [
     "Sales",
@@ -160,6 +161,7 @@ const populateRoles = (title, salary, departmentId) => {
 }
 
 const populate = async () => {
+    await setUpDb();
     for (let i = 0; i < departments.length; i++) {
         await populateDepartments(departments[i]);
     }
@@ -169,6 +171,9 @@ const populate = async () => {
     for (let i = 0; i < employees.length; i++) {
         await populateEmployees(employees[i].firstName, employees[i].lastName, employees[i].role, employees[i].manager);
     }
+
+    connection.end();
+    console.log('SETUP COMPLETE')
 }
 
 populate();
