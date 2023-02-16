@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 const { getDepartments, createDepartment } = require("../db/department");
-const { createEmployee } = require("../db/employee");
+const { createEmployee, getEmployees, getEmployeeNameRoleDepartment } = require("../db/employee");
 const { createRole, getRoles } = require("../db/role");
 
 const createDepartmentQuestions = async () => {
@@ -40,7 +40,8 @@ const createRoleQuestions = async () => {
 
 const createEmployeeQuestions = async () => {
   const roles = await getRoles();
-  const { firstName, lastName, roleId } = await inquirer.prompt([
+  const employees = await getEmployeeNameRoleDepartment();
+  const { firstName, lastName, roleId, managerId } = await inquirer.prompt([
     {
       name: "firstName",
       type: "input",
@@ -60,8 +61,17 @@ const createEmployeeQuestions = async () => {
         value: role.id,
       })),
     },
+    {
+      name: "managerId",
+      type: "list",
+      message: "Who is the manager of the employee?",
+      choices: employees.map((employee) => ({
+        name: `${employee.first_name} ${employee.last_name} (${employee.title})`,
+        value: employee.id,
+      })),
+    },
   ]);
-  await createEmployee(firstName, lastName, roleId);
+  await createEmployee(firstName, lastName, roleId, managerId);
 };
 
 module.exports = {
