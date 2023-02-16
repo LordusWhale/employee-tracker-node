@@ -14,11 +14,11 @@ const createEmployee = (firstName, lastName, roleId, managerId) => {
 };
 
 const getEmployees = () => {
-  const q = `select employee.first_name, employee.last_name, lower_role.title, lower_role.salary, manager.first_name as manager_first_name, manager.last_name as manage_last_name, upper_role.title as manager_title from employee 
+  const q = `select employee.id, employee.first_name, employee.last_name, lower_role.title, lower_role.salary, manager.first_name as manager_first_name, manager.last_name as manage_last_name, upper_role.title as manager_title from employee 
   left JOIN role as lower_role on employee.role_id = lower_role.id 
   left join employee as manager on employee.manager_id = manager.id
   left JOIN role as upper_role on manager.role_id = upper_role.id
-  ORDER BY employee.last_name
+  ORDER BY employee.id
       `;
   return new Promise((resolve, reject) => {
     connection.query(q, (err, result) => {
